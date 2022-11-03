@@ -148,7 +148,7 @@ In *.../Gated-LIF/cifar10dvs*, we also add some different models including GLIF-
      <td><center>7B-wideNet</center></td>
     <td ><center>CIFAR10-DVS</center></td>
     <td ><center>16</center></td>
-    <td ><center>77.20</center></td>
+    <td ><center>78.10</center></td>
   </tr>
       <tr>
       <td ><center>ResNet-18MS</center></td>
@@ -161,7 +161,7 @@ In *.../Gated-LIF/cifar10dvs*, we also add some different models including GLIF-
 
 
 
-P.S. the CIFAR10-DVS result is 0.4% higher than what is reported in the paper.  Because we fix a minor bug in the `.../Gated-LIF/cifar10dvs/smodels`. The fixed script, new training logs, and to-date trained models have been updated or added by the date 2022/11/3, which should work well and match the results in the above list.
+P.S. the CIFAR10-DVS result is 1.3% higher than what is reported in the paper.  Because we fix a minor bug in the `.../Gated-LIF/cifar10dvs/smodels`. The fixed script, new training logs, and to-date trained models have been updated or added by the date 2022/11/3, which should work well and match the results in the above list.
 
 
 
