@@ -27,15 +27,15 @@ The main requirements of this project are as follows:
 
 ### Trained Models for Static Datasets: CIFAR, ImageNet
 
-Our trained models can be found in the folder **trained models**.  Download and place them to any folder you would like.  For example, `/home/GLIF_models`.
+Our trained models can be found on [*Google Drive*](https://drive.google.com/file/d/1CCrAX8wU3r_MM8RlA6ppa1jUtYGnviwO/view?usp=sharing).  Download and place them in any folder you would like.  For example, `/home/GLIF_models`.
 
 
 
 ### Evaluate Trained GLIF SNNs on Static Datasets: CIFAR, ImageNet
 
-The following are the python commands to run the python scripts `train.py`. We recommend using **Absolute Paths** to clarify the required Directories, and please make sure to change the current working directory to this project, i.e., `$pwd>>.../Gated-LIF`. 
+The following are the python commands to run the python script `train.py`. We recommend using **Absolute Paths** to clarify the required Directories, and please make sure to change the current working directory to this project, i.e., `$pwd>>.../Gated-LIF`. 
 
-Note that we utilized single GPU for evaluations.
+Note that we utilized a single GPU for evaluations.
 ```python
 # CIFAR-10
 ## Resnet-18
@@ -80,7 +80,7 @@ Training details are printed in train.log. Checkpoints are stored in `./raw/mode
 
 We plug GLIF into an open-source project for CIFAR10-DVS, which is [SEW-PLIF-CIFAR10-DVS](https://github.com/fangwei123456/Spike-Element-Wise-ResNet/tree/main/cifar10dvs).  
 
-The codes, pre-trained models, and training logs for CIFAR10-DVS are saved in the file *.../Gated-LIF/cifar10dvs*.  The following is the python command that we use to train a GLIF-based 7B-wideNet:
+The codes and training logs for CIFAR10-DVS are saved in the file *.../Gated-LIF/cifar10dvs*.  The following is the python command that we use to train a GLIF-based 7B-wideNet:
 
  ```python
  #	CIFAR10-DVS
