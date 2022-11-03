@@ -27,7 +27,7 @@ The main requirements of this project are as follows:
 
 ### Trained Models for Static Datasets: CIFAR, ImageNet
 
-Our trained models can be found on [*Google Drive*](https://drive.google.com/file/d/1CCrAX8wU3r_MM8RlA6ppa1jUtYGnviwO/view?usp=sharing).  Download and place them in any folder you would like.  For example, `/home/GLIF_models`.
+Our trained models can be found in `Gated-LIF/trained models`.  Download and place them in any folder you would like.  For example, `/home/GLIF_models`.
 
 
 
@@ -51,7 +51,7 @@ CUDA_VISIBLE_DEVICES=[GPU-ID] python -u train.py --modeltag [TRAINED-MODEL-FILEN
 ## ResNet-18MS
 CUDA_VISIBLE_DEVICES=[GPU-ID] python -u train.py --modeltag [TRAINED-MODEL-FILENAME] --soft-mode --eval --eval-resume [PATH-TO-TRAINED-MODEL-FOLDER] --MS18 --channel-wise --t [TIMESTEP] --train-dir [PATH-TO-IMAGENET-TRAININGSET] --val-dir [PATH-TO-IMAGENET-VALIDATIONSET] --imagenet > evaluation.log
 ```
-Specifically, `[TRAINED-MODEL-FILENAME]` refers to the filename of the .tar file, e.g., ''resCifar18stand-CIFAR10-step6-CW.pth.tar''. `[PATH-TO-TRAINED-MODEL-FOLDER]` refers to the folder that cotains trained models, e.g., `/home/GLIF_models`. `TIMESTEP` refers to the lengeth of the time window of the model, e.g., the timestep of the model ''resCifar18stand-CIFAR10-step6-CW.pth.tar'' is 6.
+Specifically, `[TRAINED-MODEL-FILENAME]` refers to the filename of the .tar file, e.g., ''resCifar18stand-CIFAR10-step6-CW.pth.tar''. `[PATH-TO-TRAINED-MODEL-FOLDER]` refers to the folder that contains trained models, e.g., `/home/GLIF_models`. `TIMESTEP` refers to the length of the time window of the model, e.g., the timestep of the model ''resCifar18stand-CIFAR10-step6-CW.pth.tar'' is 6.
 
 Evaluation results are printed in evaluation.log.
 
@@ -80,7 +80,7 @@ Training details are printed in train.log. Checkpoints are stored in `./raw/mode
 
 We plug GLIF into an open-source project for CIFAR10-DVS, which is [SEW-PLIF-CIFAR10-DVS](https://github.com/fangwei123456/Spike-Element-Wise-ResNet/tree/main/cifar10dvs).  
 
-The codes and training logs for CIFAR10-DVS are saved in the file *.../Gated-LIF/cifar10dvs*.  The following is the python command that we use to train a GLIF-based 7B-wideNet:
+The codes, trained models, and training logs for CIFAR10-DVS are saved in the file `.../Gated-LIF/cifar10dvs`.  The following is the python command that we use to train a GLIF-based 7B-wideNet:
 
  ```python
  #	CIFAR10-DVS
@@ -148,7 +148,7 @@ In *.../Gated-LIF/cifar10dvs*, we also add some different models including GLIF-
      <td><center>7B-wideNet</center></td>
     <td ><center>CIFAR10-DVS</center></td>
     <td ><center>16</center></td>
-    <td ><center>76.80</center></td>
+    <td ><center>77.20</center></td>
   </tr>
       <tr>
       <td ><center>ResNet-18MS</center></td>
@@ -162,12 +162,13 @@ In *.../Gated-LIF/cifar10dvs*, we also add some different models including GLIF-
 
 
 
+
 ## Further Exploration & Future Expectation
 
-1. In the script `.../Gated-LIF/train.py`, we remain some useful python commands to reproduce our ablation studies. Anyone who reads the parser descriptions from line 22 to 71 should easily understand how to use them.
-2. Furthermore, we also remain some codes to support the experiments of unstudied GLIF-based variants and some tricks.  For example, making all the gating factors learnable but kept binary, which is referred to as 'hard mode', still brings improved performance compared to some LIF-based SNNs.  Different from the proposed GLIF method in the paper, the 'hard mode' should require the same computation overhead as the normal LIFs, and meanwhile increases the heterogeneity of SNNs. (Experimental results of 'Hard Mode' GLIF will be revealed as extended studies in our in-progress works.)
-3. The distributions of learned paremeters is very interesting as we visualized them in the paper.  The initially identical paremeters learn into different bell-shaped distributions layer-wisely.  This may shed light on some interesting connections between DNNs and hierarchical structures of brains.
-4. Since GLIF offers more tunable parameters than LIF, extending it into the frameworks of the ANN2SNN coversion should be interesting.  Because the recent trend of ANN2SNN is figuring out the better parameter mapping from ANNs to SNNs to improve the performance of the converted SNNs.  Hopefully, this could pave a new path to that field if we can find the parameter mapping from ANNs to GLIF-based SNNs.
+1. In the script `.../Gated-LIF/train.py`, we retain some useful python commands to reproduce our ablation studies. Anyone who reads the parser descriptions from line 22 to 71 should easily understand how to use them.
+2. Furthermore, we also retain some codes to support the experiments of unstudied GLIF-based variants and some tricks.  For example, making all the gating factors learnable but keeping binary, which is referred to as 'hard mode', still brings an improved performance compared to some LIF-based SNNs.  Different from the proposed GLIF method in the paper, the 'hard mode' should require the same computation overhead as the normal LIFs, and meanwhile increases the heterogeneity of SNNs. (Experimental results of 'Hard Mode' GLIF will be revealed as extended studies in our in-progress works.)
+3. The distributions of learned parameters are very interesting as we visualized them in the paper.  The initially identical parameters learn into different bell-shaped distributions layer-wisely.  This may shed light on some interesting connections between DNNs and the hierarchical structures of brains.
+4. Since GLIF offers more tunable parameters than LIF, extending it into the frameworks of the ANN2SNN conversion should be interesting.  Because the recent trend of ANN2SNN is figuring out better parameter mapping from ANNs to SNNs to improve the performance of the converted SNNs.  Hopefully, this could pave a new path to that field if we can find the parameter mapping from ANNs to GLIF-based SNNs.
 
 
 
