@@ -80,7 +80,7 @@ Training details are printed in train.log. Checkpoints are stored in `./raw/mode
 
 We plug GLIF into an open-source project for CIFAR10-DVS, which is [SEW-PLIF-CIFAR10-DVS](https://github.com/fangwei123456/Spike-Element-Wise-ResNet/tree/main/cifar10dvs).  
 
-The codes, and training logs for CIFAR10-DVS are saved in the file *.../Gated-LIF/cifar10dvs*.  The following is the python command that we use to train a GLIF-based 7B-wideNet:
+The codes, pre-trained models, and training logs for CIFAR10-DVS are saved in the file *.../Gated-LIF/cifar10dvs*.  The following is the python command that we use to train a GLIF-based 7B-wideNet:
 
  ```python
  #	CIFAR10-DVS
