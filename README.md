@@ -161,7 +161,7 @@ In *.../Gated-LIF/cifar10dvs*, we add some different models, including GLIF-base
 
 
 
-P.S. the CIFAR10-DVS result is 1.3% higher than reported in the *openreview* discussion.  Because we fix a minor bug in the `.../Gated-LIF/cifar10dvs/smodels`. The fixed script, new training logs, and to-date trained models have been updated or added by 2022/11/3, which should work well and match the results in the above list. The paper on the *openreview* has already been fixed and corrected.
+P.S. the CIFAR10-DVS result is 1.3% higher than reported in the *openreview* discussion.  Because we fixed a minor bug in the `.../Gated-LIF/cifar10dvs/smodels`. The fixed script, new training logs, and to-date trained models have been updated or added by 2022/11/3, which should work well and match the results in the above list. The paper on the *openreview* has already been fixed, corrected, and ensured correct.
 
 
 
