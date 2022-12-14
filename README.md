@@ -72,7 +72,7 @@ CUDA_VISIBLE_DEVICES=[GPU-ID] python -u train.py --epoch 200 --batch-size 64 --l
 ## ResNet-18MS
 CUDA_VISIBLE_DEVICES=[GPU-IDs] python -m torch.distributed.run --master_port [PORT-ID] --nproc_per_node [NUMBER-OF-GPUs] train.py --epoch 150 --batch-size 50 --learning-rate 0.1 --modeltag [CHECKPOINT-FILENAME] --soft-mode --MS18 --channel-wise --randomgate --tunable-lif --t [TIMESTEP] --train-dir [PATH-TO-IMAGENET-TRAININGSET] --val-dir [PATH-TO-IMAGENET-VALIDATIONSET] --imagenet> train.log
 ```
-Training details are printed in train.log. Checkpoints are stored in `./raw/models`.  Model options and training hyperparameters are configurable with different commands. Those commands as well as their descriptions can be found in `.../Gated-LIF/train.py` from line 22 to line 71.
+Training details are printed in train.log. Checkpoints are stored in `./raw/models`.  Model options and training hyperparameters are configurable with different commands. Those commands and their descriptions can be found in `.../Gated-LIF/train.py` from line 22 to line 71.
 
 
 
@@ -88,7 +88,7 @@ The codes, trained models, and training logs for CIFAR10-DVS are saved in the fi
  CUDA_VISIBLE_DEVICES=6 python ./cifar10dvs/train.py --dsr_da -amp -out_dir ./logs -model SEWResNet_GLIF_dsr -cnf ADD -device cuda:0 -dts_cache /mnt/lustre/GPU8/home/usr/dvs_datasets/DVSCIFAR10/cifar10dvs_cache_SEW -epochs 200 -T_max 64 -T 16 -data_dir /mnt/lustre/GPU8/home/usr/dvs_datasets/DVSCIFAR10 -lr 0.01 -b 32 > True_widePLIF7B_GLIF-T_16-anneal-dsr-epoch_200.log
  ```
 
-In *.../Gated-LIF/cifar10dvs*, we also add some different models including GLIF-based models to the original [*cifar10dvs*](https://github.com/fangwei123456/Spike-Element-Wise-ResNet/tree/main/cifar10dvs) .  You can easily find their model names from line 144 to line 128 in `.../Gated-LIF/cifar10dvs/train.py`.   
+In *.../Gated-LIF/cifar10dvs*, we add some different models, including GLIF-based models, to the original [*cifar10dvs*](https://github.com/fangwei123456/Spike-Element-Wise-ResNet/tree/main/cifar10dvs).  You can easily find their model names from line 144 to line 128 in `.../Gated-LIF/cifar10dvs/train.py`.   
 
 
 
@@ -161,16 +161,16 @@ In *.../Gated-LIF/cifar10dvs*, we also add some different models including GLIF-
 
 
 
-P.S. the CIFAR10-DVS result is 1.3% higher than what is reported in the paper.  Because we fix a minor bug in the `.../Gated-LIF/cifar10dvs/smodels`. The fixed script, new training logs, and to-date trained models have been updated or added by the date 2022/11/3, which should work well and match the results in the above list.
+P.S. the CIFAR10-DVS result is 1.3% higher than reported in the *openreview* discussion.  Because we fix a minor bug in the `.../Gated-LIF/cifar10dvs/smodels`. The fixed script, new training logs, and to-date trained models have been updated or added by 2022/11/3, which should work well and match the results in the above list. The paper on the *openreview* has already been fixed and corrected.
 
 
 
 ## Further Exploration & Future Expectation
 
 1. In the script `.../Gated-LIF/train.py`, we retain some useful python commands to reproduce our ablation studies. Anyone who reads the parser descriptions from line 22 to 71 should easily understand how to use them.
-2. Furthermore, we also retain some codes to support the experiments of unstudied GLIF-based variants and some tricks.  For example, making all the gating factors learnable but keeping binary, which is referred to as 'hard mode', still brings an improved performance compared to some LIF-based SNNs.  Different from the proposed GLIF method in the paper, the 'hard mode' should require the same computation overhead as the normal LIFs, and meanwhile increases the heterogeneity of SNNs. (Experimental results of 'Hard Mode' GLIF will be revealed as extended studies in our in-progress works.)
-3. The distributions of learned parameters are very interesting as we visualized them in the paper.  The initially identical parameters learn into different bell-shaped distributions layer-wisely.  This may shed light on some interesting connections between DNNs and the hierarchical structures of brains.
-4. Since GLIF offers more tunable parameters than LIF, extending it into the frameworks of the ANN2SNN conversion should be interesting.  Because the recent trend of ANN2SNN is figuring out better parameter mapping from ANNs to SNNs to improve the performance of the converted SNNs.  Hopefully, this could pave a new path to that field if we can find the parameter mapping from ANNs to GLIF-based SNNs.
+2. Furthermore, we retain some codes to support the experiments of unstudied GLIF-based variants and some tricks.  For example, making all the gating factors learnable but keeping binary, referred to as 'hard mode', still improves performance compared to some LIF-based SNNs.  Unlike the proposed GLIF method in the paper, the 'hard mode' should require the same computation overhead as the normal LIFs, increasing the heterogeneity of SNNs. (Experimental results of 'Hard Mode' GLIF will be revealed as extended studies in our in-progress works.)
+3. The distributions of learned parameters are very interesting, as we visualized them in the paper.  The initially identical parameters learn into different bell-shaped distributions layer-wisely.  This may shed light on some interesting connections between DNNs and the hierarchical structures of brains.
+4. Since GLIF offers more tunable parameters than LIF, extending it into the frameworks of the ANN2SNN conversion should be interesting because the recent trend of ANN2SNN is figuring out better parameter mapping from ANNs to SNNs to improve the performance of the converted SNNs.  Hopefully, this could pave a new path to that field if we can find the parameter mapping from ANNs to GLIF-based SNNs.
 
 
 
