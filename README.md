@@ -2,7 +2,7 @@
 
 This project is a PyTorch implementation for
 
-> **GLIF: A Unified Gated Leaky Integrate-and-Fire Neuron for Spiking Neural Networks**
+> [**GLIF: A Unified Gated Leaky Integrate-and-Fire Neuron for Spiking Neural Networks**](https://openreview.net/forum?id=UmFSx2c4ubT)
 >
 > Xingting Yao, Fanrong Li, Zitao Mo, Jian Cheng
 >
