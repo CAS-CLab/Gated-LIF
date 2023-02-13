@@ -6,6 +6,17 @@ import numpy as np
 from collections import OrderedDict
 choice_param_name = ['alpha', 'beta', 'gamma']
 lifcal_param_name = ['tau', 'Vth', 'leak', 'conduct']
+init_constrain = 0.2
+def randomize_gate(model):
+    for name, module in model._modules.items():
+        if hasattr(module, "_modules"):
+            model._modules[name] = randomize_gate(module)
+        if all([hasattr(module, i) for i in choice_param_name]):
+            torch.nn.init.uniform_(module.alpha, a=-(0.5 * init_constrain), b=(0.5 * init_constrain))
+            torch.nn.init.uniform_(module.beta, a=-(0.5 * init_constrain), b=(0.5 * init_constrain))
+            torch.nn.init.uniform_(module.gamma, a=-(0.5 * init_constrain), b=(0.5 * init_constrain))
+    return model
+
 def deletStrmodule(checkpoint: dict):
     outerkey = list(checkpoint.keys())
     new_dict = {}

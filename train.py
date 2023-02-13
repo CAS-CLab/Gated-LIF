@@ -4,7 +4,7 @@ from data_builder import *
 import argparse
 from networks_for_CIFAR import *
 from networks_for_ImageNet import *
-from utils import accuracy, AvgrageMeter, save_checkpoint, get_model, create_para_dict, read_param, record_param, deletStrmodule
+from utils import accuracy, AvgrageMeter, save_checkpoint, get_model, create_para_dict, read_param, record_param, deletStrmodule, randomize_gate
 import sys
 sys.path.append("..")
 from layers import *
@@ -271,9 +271,9 @@ def main():
         else:
             model = ResNet_19_cifar(lif_param=initial_dict, input_size=32, n_class=10)
 
-
     if args.randomgate:
-        model.randomize_gate()
+        randomize_gate(model)
+        # model.randomize_gate
         print('randomized gate')
 
     modeltag = args.modeltag
