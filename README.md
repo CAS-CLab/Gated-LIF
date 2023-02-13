@@ -6,7 +6,7 @@ This project is a PyTorch implementation for
 >
 > Xingting Yao, Fanrong Li, Zitao Mo, Jian Cheng
 >
-> NeurIPS 2022 Poster & Spotlight Presentation
+> NeurIPS 2022 Poster Presentation
 
 <img src="https://github.com/Ikarosy/Gated-LIF/blob/master/IMG/GLIF.png" width="1000px">
 
