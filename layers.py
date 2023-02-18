@@ -25,7 +25,7 @@ class SpikeAct_extended(torch.autograd.Function):
 
     @staticmethod
     def backward(ctx, grad_output):
-        input, = ctx.saved_tensors
+        input = ctx.saved_tensors
         grad_input = grad_output.clone()
 
         # hu is an approximate func of df/du in linear formulation
@@ -44,15 +44,17 @@ spikeAct_extended = SpikeAct_extended.apply
 
 class ArchAct(torch.autograd.Function):
     @staticmethod
-    def forward(self, input):
-        self.save_for_backward(input)
+    def forward(ctx, input):
+        ctx.save_for_backward(input)
         output = torch.gt(input, 0.5)
         return output.float()
     @staticmethod
-    def backward(self, grad_output):
-        input, = self.saved_tensors
+    def backward(ctx, grad_output):
+        input = ctx.saved_tensors
         grad_input = grad_output.clone()
         return grad_input
+
+ArchAct = ArchAct.apply
 
 class LIFSpike(nn.Module):
     '''
