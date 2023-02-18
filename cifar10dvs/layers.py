@@ -58,9 +58,7 @@ class SpikeAct_extended(torch.autograd.Function):
         # triangles
         # hu = (1 / gamma_SG) * (1 / gamma_SG) * ((gamma_SG - input.abs()).clamp(min=0))
 
-        return grad_input * hu,
-
-spikeAct_extended = SpikeAct_extended.apply
+        return grad_input * hu
 
 class QActF(torch.autograd.Function):
     @staticmethod
@@ -73,8 +71,6 @@ class QActF(torch.autograd.Function):
         input = ctx.saved_tensors
         grad_input = grad_output.clone()
         return grad_input
-
-QActF = QActF.apply
 
 class QAct(nn.Module):
     def __init__(self, act_bits=2, act_mode="linear", scale_factor=None, zero_point_bias=None):
@@ -249,7 +245,7 @@ class LIFSpike_CW(nn.Module):
         I_t1 = W_mul_o_t_n1 * (1 - be * (1 - conduct[None, :, None, None]))
         u_t1_n1 = ((1 - al * (1 - tau[None, :, None, None])) * u_t_n1 * (1 - ga * o_t_n1.clone()) - (1 - al) * leak[None, :, None, None]) + \
                   I_t1 - (1 - ga) * reVth[None, :, None, None] * o_t_n1.clone()
-        o_t1_n1 = spikeAct_extended(u_t1_n1 - Vth[None, :, None, None])
+        o_t1_n1 = SpikeAct_extended.apply(u_t1_n1 - Vth[None, :, None, None])
         return u_t1_n1, o_t1_n1
 
     def _initialize_params(self, **kwargs):
@@ -293,7 +289,7 @@ class LIFSpike_vanilla(nn.Module):
         I_t1 = W_mul_o_t_n1
         u_t1_n1 = tau * u_t_n1 * (1 - o_t_n1.detach())  + I_t1
         # o_t1_n1 = surrogate_sigmoid.apply(u_t1_n1 - Vth, 4.0)
-        o_t1_n1 = spikeAct_extended(u_t1_n1 - Vth)
+        o_t1_n1 = SpikeAct_extended.apply(u_t1_n1 - Vth)
         return u_t1_n1, o_t1_n1
 
     def _initialize_params(self, **kwargs):

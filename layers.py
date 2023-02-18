@@ -38,9 +38,7 @@ class SpikeAct_extended(torch.autograd.Function):
         # triangles
         # hu = (1 / gamma_SG) * (1 / gamma_SG) * ((gamma_SG - input.abs()).clamp(min=0))
 
-        return grad_input * hu,
-
-spikeAct_extended = SpikeAct_extended.apply
+        return grad_input * hu
 
 class ArchAct(torch.autograd.Function):
     @staticmethod
@@ -53,8 +51,6 @@ class ArchAct(torch.autograd.Function):
         input = ctx.saved_tensors
         grad_input = grad_output.clone()
         return grad_input
-
-ArchAct = ArchAct.apply
 
 class LIFSpike(nn.Module):
     '''
@@ -115,7 +111,7 @@ class LIFSpike(nn.Module):
         u_t1_n1 = ((1 - al * (1 - tau)) * u_t_n1 * (1 - ga * o_t_n1.clone()) - (1 - al) * leak) + \
                   I_t1 - \
                   (1 - ga) * reVth * o_t_n1.clone()
-        o_t1_n1 = spikeAct_extended(u_t1_n1 - Vth)
+        o_t1_n1 = SpikeAct_extended.apply(u_t1_n1 - Vth)
         return u_t1_n1, o_t1_n1
 
     def _initialize_params(self, **kwargs):
@@ -181,7 +177,7 @@ class LIFSpike_CW(nn.Module):
         I_t1 = W_mul_o_t_n1 * (1 - be * (1 - conduct[None, :, None, None]))
         u_t1_n1 = ((1 - al * (1 - tau[None, :, None, None])) * u_t_n1 * (1 - ga * o_t_n1.clone()) - (1 - al) * leak[None, :, None, None]) + \
                   I_t1 - (1 - ga) * reVth[None, :, None, None] * o_t_n1.clone()
-        o_t1_n1 = spikeAct_extended(u_t1_n1 - Vth[None, :, None, None])
+        o_t1_n1 = SpikeAct_extended.apply(u_t1_n1 - Vth[None, :, None, None])
         return u_t1_n1, o_t1_n1
 
     def _initialize_params(self, **kwargs):
@@ -235,7 +231,7 @@ class LIFSpike_CW_softsimple(nn.Module):
         u_t1_n1 = ((tau[None, :, None, None]) * u_t_n1 * (1 - o_t_n1.clone()) - leak[None, :, None, None]) + \
                   I_t1 - \
                   reVth[None, :, None, None] * o_t_n1.clone()
-        o_t1_n1 = spikeAct_extended(u_t1_n1 - Vth[None, :, None, None])
+        o_t1_n1 = SpikeAct_extended.apply(u_t1_n1 - Vth[None, :, None, None])
         return u_t1_n1, o_t1_n1
 
     def _initialize_params(self, **kwargs):
